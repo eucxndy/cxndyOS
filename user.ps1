@@ -1,4 +1,9 @@
-$pics = "C:\ProgramData\Microsoft\User Account Pictures"
-Copy-Item ".\user*.png" $pics -Force
+$ErrorActionPreference = "SilentlyContinue"
 
-Remove-Item "$env:LOCALAPPDATA\Microsoft\Windows\AccountPictures" -Recurse -Force
+$src = "."
+$dst = "C:\ProgramData\Microsoft\User Account Pictures"
+
+if (Test-Path $dst) {
+    Copy-Item "$src\user*.png" $dst -Force
+    Remove-Item "$env:LOCALAPPDATA\Microsoft\Windows\AccountPictures" -Recurse -Force
+}
